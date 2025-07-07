@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Call Dify API
         run: |
-          DIFY_API_KEY="${{app-uC6Ke2xJs93tzAB2mfvd9agP}}"
+          DIFY_API_KEY="${{ secrets.DIFY_API_KEY }}"
           DIFY_API_ENDPOINT="https://api.dify.ai/v1"
           
           # 构建请求体
