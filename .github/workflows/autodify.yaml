@@ -12,7 +12,7 @@ jobs:
       - name: Call Dify API
         run: |
           DIFY_API_KEY="${{ secrets.DIFY_API_KEY }}"
-          DIFY_API_ENDPOINT="https://api.dify.ai/v1"
+          DIFY_API_ENDPOINT="https://api.dify.ai/v1/your/workflow/endpoint"
           
           # 构建请求体
           PAYLOAD=$(cat <<EOF
