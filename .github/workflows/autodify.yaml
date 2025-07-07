@@ -1,0 +1,44 @@
+name: Daily Dify Workflow
+
+on:
+  schedule:
+    - cron: '40 09 * * *'
+  workflow_dispatch:
+
+jobs:
+  call-dify-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Dify API
+        run: |
+          DIFY_API_KEY="${{app-uC6Ke2xJs93tzAB2mfvd9agP}}"
+          DIFY_API_ENDPOINT="https://api.dify.ai/v1"
+          
+          # 构建请求体
+          PAYLOAD=$(cat <<EOF
+          {
+            "input": {
+              "param1": "value1",
+              "param2": "value2"
+            }
+          }
+          EOF
+          )
+          
+          # 发送请求
+          response=$(curl -s -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $DIFY_API_KEY" \
+            -d "$PAYLOAD" \
+            "$DIFY_API_ENDPOINT")
+          
+          echo "API Response:"
+          echo $response
+          
+          if echo $response | grep -q "success"; then
+            echo "Dify workflow executed successfully"
+            exit 0
+          else
+            echo "Failed to execute Dify workflow"
+            exit 1
+          fi
