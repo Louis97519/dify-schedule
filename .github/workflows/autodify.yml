@@ -3,7 +3,7 @@ name: Dify Scheduled Workflow
 on:
   schedule:
     # 每天 UTC 时间 00:00 运行（北京时间 08:00）
-    - cron: '00 8 * * *'
+    - cron: '00 00 * * *'
     # 添加更多时间规则（每30分钟示例）：
     # - cron: '*/10 * * * *'
 
