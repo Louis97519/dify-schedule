@@ -15,21 +15,22 @@ jobs:
         env:
           DIFY_API_KEY: ${{ secrets.DIFY_API_KEY }}
           WORKFLOW_URL: ${{ secrets.WORKFLOW_API_URL }}
+          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
         run: |
           # 使用 curl 调用 Dify API
           response=$(curl -s -X POST "$WORKFLOW_URL" \
             -H "Authorization: Bearer $DIFY_API_KEY" \
             -H "Content-Type: application/json" \
-            -d '{
+            -d "{
                   "inputs": {
                     "city": "310000",
-                    "key": @{variables('weather_api_key')},
+                    "key": "$WEATHER_API_KEY",
                     "output": "JSON",
                     "extensions": "all"
                 },
                   "response_mode": "streaming",
                   "user": "abc-123"
-                }')
+                }")
 
           # 检查响应（可选）
           echo "API Response: $response"
